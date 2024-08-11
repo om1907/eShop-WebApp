@@ -15,6 +15,7 @@ const Register = () => {
     const handleSubmit=async(e)=>{
         e.preventDefault();
         try {
+            console.log(name,email,password,phone);
             const res=await axios.post('http://localhost:3000/api/v1/auth/register');
             if(res.status===200){
               console.log(res);
