@@ -45,7 +45,7 @@ exports.RegisterController= async(req,res)=>{
     //save
     const user=await new User({name,email,password:hashedPassword,address,phone}).save();
 
-    res.status(201).send({
+    res.status(201).json({
         success:true,
         message:'user registered successfully',
         user
