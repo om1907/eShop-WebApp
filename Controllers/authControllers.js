@@ -4,7 +4,7 @@ const jwt=require('jsonwebtoken')
 
 exports.RegisterController= async(req,res)=>{
     try {
-        const {name,email,password,confirmPassword,phone,address}=req.body;
+        const {name,email,password,phone,address}=req.body;
 
     //validation
     if(!name){
@@ -16,20 +16,11 @@ exports.RegisterController= async(req,res)=>{
     if(!password){
         return res.send({error:'Password is required'});
     }
-    if(!confirmPassword){
-        return res.send({error:'ConfirmPassword is required'});
-    }
     if(!phone){
         return res.send({error:'Phone No. is required'});
     }
     if(!address){
         return res.send({error:'Address is required'});
-    }
-    if(password!=confirmPassword){
-        return res.send({
-            success:false,
-            message:'Password and confirmPassword are not same'
-        })
     }
     //check user
     const existingUser=await User.findOne({email});

@@ -1,33 +1,40 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Layout from "../../components/Layout/Layout";
-import {toast} from 'react-toastify'
-import axios from 'axios'
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Register = () => {
-    const [name,setName]=useState('');
-    const [email,setEmail]=useState('');
-    const [password,setPassword]=useState('');
-    const [confirmPassword,setConfirmPassword]=useState('');
-    const [phone,setPhone]=useState('');
-    const [address,setAddress]=useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
 
-        //form function
-    const handleSubmit=async(e)=>{
-        e.preventDefault();
-        try {
-            const res=await axios.post('http://localhost:3000/api/v1/auth/register');
-            if(res.status===200){
-              console.log(res);
-              toast.success('User registered successfully');
-            }else{
-              toast.error('Registration failed ');
-            }
-            console.log(res);
-        } catch (error) {
-            console.log(error)
-            toast.error('Something went wrong in register submit')            
-        }
+  //form function
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Basic validation for password confirmation
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
     }
+    try {
+      const res = await axios.post(
+        "http://localhost:3030/api/v1/auth/register",{name,email,password,phone,address}
+      );
+      if (res.status === 201) {
+        toast.success("User registered successfully");
+      } else {
+        toast.error("Registration failed ");
+      }
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong in register submit");
+    }
+  };
 
   return (
     <Layout title="Register -Ecommerce App">
@@ -38,9 +45,9 @@ const Register = () => {
               Name
             </label>
             <input
-              type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              type="text"
               className="form-control"
               id="exampleInputName"
               required
