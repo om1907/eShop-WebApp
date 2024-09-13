@@ -1,5 +1,4 @@
 const mongoose=require('mongoose');
-const { required } = require('serverless/lib/config-schema');
 
 const userSchema=new mongoose.Schema({
     name:{
