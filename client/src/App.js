@@ -18,7 +18,7 @@ function App() {
       <Route path='/contact' element={<Contact/>} />
       <Route path='/policy' element={<Policy/>} />
       <Route path='/category' element={<Categories/>} />
-      <Route path='/signup' element={<Register/>} />
+      <Route path='/register' element={<Register/>} />
       <Route path='/login' element={<Login/>} />
       <Route path='*' element={<PageNotFound/>} />
     </Routes>

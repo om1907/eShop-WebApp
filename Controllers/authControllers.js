@@ -4,26 +4,19 @@ const jwt=require('jsonwebtoken')
 
 exports.RegisterController= async(req,res)=>{
     try {
-        const {name,email,password,confirmPassword,phone,address}=req.body;
-
+        const {name,email,password,confirmPassword}=req.body;
     //validation
     if(!name){
-        return res.send({error:'Name is required'});
+        return res.send({message :'Name is required'});
     }
     if(!email){
-        return res.send({error:'Email is required'});
+        return res.send({message :'Email is required'});
     }
     if(!password){
-        return res.send({error:'Password is required'});
+        return res.send({message :'Password is required'});
     }
     if(!confirmPassword){
-        return res.send({error:'ConfirmPassword is required'});
-    }
-    if(!phone){
-        return res.send({error:'Phone No. is required'});
-    }
-    if(!address){
-        return res.send({error:'Address is required'});
+        return res.send({message :'ConfirmPassword is required'});
     }
     if(password!=confirmPassword){
         return res.send({
@@ -43,7 +36,7 @@ exports.RegisterController= async(req,res)=>{
     //register user
     const hashedPassword=await hashPassword(password);
     //save
-    const user=await new User({name,email,password:hashedPassword,address,phone}).save();
+    const user=await new User({name,email,password:hashedPassword}).save();
 
     res.status(201).json({
         success:true,
@@ -79,7 +72,7 @@ exports.loginController=async (req,res)=>{
         }
         const match=await comparePassword(password,user.password);
         if(!match){
-            return res.status(200).send({
+            return res.status(205).send({
                 success:false,
                 message:'Invalid password'
             })
@@ -92,8 +85,6 @@ exports.loginController=async (req,res)=>{
             user:{
                 name:user.name,
                 email:user.email,
-                phone:user.phone,
-                address:user.address
             },
             token
         })

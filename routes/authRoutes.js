@@ -8,6 +8,6 @@ const router=express.Router();
 router.post('/register',RegisterController);
 
 //login
-router.post('/login',requireSignIn,isAdmin,loginController);
+router.post('/login',loginController);
 
 module.exports=router;
