@@ -1,35 +1,38 @@
-const mongoose=require('mongoose');
-const { required } = require('serverless/lib/config-schema');
+const mongoose = require('mongoose')
 
-const userSchema=new mongoose.Schema({
-    name:{
-        type: String,
-        required:true,
-        trim: true
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
-    email:{
-        type:String,
-        required:true,
-        unique: true
+    email: {
+      type: String,
+      required: true,
+      unique: true,
     },
-    password:{
-        type: String,
-        required: true,
+    password: {
+      type: String,
+      required: true,
     },
-    phone:{
-        type: String,
-        required: true
+    phone: {
+      type: String,
     },
-    address:{
-        type:String,
-        required: true
+    address: {
+      type: String,
     },
-    role:{
-        type:Number,
-        default:0
-    }
-},{timestamps:true});
+    role: {
+      type: Number,
+      default: 0,
+    },
+    answer: {
+      type: String,
+    },
+  },
+  { timestamps: true },
+)
 
-const User=mongoose.model('User',userSchema);
+const User = mongoose.model('User', userSchema)
 
-module.exports=User;
+module.exports = User
