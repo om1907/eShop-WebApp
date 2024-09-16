@@ -1,30 +1,34 @@
-import React, { useState } from "react";
-import Layout from "../../components/Layout/Layout";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
+import React, { useState } from 'react'
+import Layout from '../../components/Layout/Layout'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 const ForgotPassword = () => {
-  const [email, setEmail] = useState();
-  const [answer, setAnswer] = useState();
-  const [newPassword, setNewPassword] = useState();
+  const [email, setEmail] = useState()
+  const [answer, setAnswer] = useState()
+  const [newPassword, setNewPassword] = useState()
 
-  const navigate=useNavigate();
+  const navigate = useNavigate()
 
-  const handleSubmit=async(e)=>{
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault()
     try {
-      const res=await axios.post('/api/v1/auth/forgot-password',{email,newPassword,answer});
-      console.log(res);
-      if(res.status === 200){
-        toast.success(res.data.message);
+      const res = await axios.post('/api/v1/auth/forgot-password', {
+        email,
+        newPassword,
+        answer,
+      })
+      console.log(res)
+      if (res.status === 200) {
+        toast.success(res.data.message)
         setTimeout(() => {
           navigate('/login')
-        }, 1500);
-      }else{
-        toast.error(res.data.message);
+        }, 1500)
+      } else {
+        toast.error(res.data.message)
       }
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
   return (
@@ -72,16 +76,13 @@ const ForgotPassword = () => {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary mb-2"
-          >
+          <button type="submit" className="btn btn-primary mb-2">
             Forgot Password
           </button>
         </form>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default ForgotPassword;
+export default ForgotPassword

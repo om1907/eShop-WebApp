@@ -1,46 +1,46 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import Layout from "../../components/Layout/Layout";
-import {useNavigate ,useLocation} from "react-router-dom";
-import { useAuth } from "../../context/auth";
+import axios from 'axios'
+import React, { useState } from 'react'
+import { toast } from 'react-toastify'
+import Layout from '../../components/Layout/Layout'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useAuth } from '../../context/auth'
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [auth,setAuth]=useAuth();
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [auth, setAuth] = useAuth()
 
-  const navigate =useNavigate();
-  const location=useLocation();
+  const navigate = useNavigate()
+  const location = useLocation()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
       const res = await axios.post(`/api/v1/auth/login`, {
         email,
         password,
-      });
+      })
       if (res.status === 200) {
-        console.log(res);
-        toast.success(`${res.data.message}`);
+        console.log(res)
+        toast.success(`${res.data.message}`)
         setAuth({
           ...auth,
-          user:res.data.user,
-          token:res.data.token
+          user: res.data.user,
+          token: res.data.token,
         })
-        localStorage.setItem('auth',JSON.stringify(res.data));
+        localStorage.setItem('auth', JSON.stringify(res.data))
         setTimeout(() => {
           navigate(location.state || '/')
-        }, 2000);
+        }, 2000)
       } else {
-        toast.error(res.data.message);
+        toast.error(res.data.message)
         console.log(res.data.message)
       }
     } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong in Login page");
+      console.log(error)
+      toast.error('Something went wrong in Login page')
     }
-  };
+  }
 
   return (
     <Layout title="Login -Ecommerce App">
@@ -73,18 +73,24 @@ const Login = () => {
               required
             />
           </div>
-          <div class='d-flex flex-column justify-content-center justify-content-between' >
-          <button type="submit" className="btn btn-primary mb-2" onClick={()=>{navigate('/forgot-password')}}>
-            Forgot Password
-          </button>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
+          <div class="d-flex flex-column justify-content-center justify-content-between">
+            <button
+              type="submit"
+              className="btn btn-primary mb-2"
+              onClick={() => {
+                navigate('/forgot-password')
+              }}
+            >
+              Forgot Password
+            </button>
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
           </div>
         </form>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

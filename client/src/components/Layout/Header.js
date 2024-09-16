@@ -1,19 +1,19 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import { SiShopify } from "react-icons/si";
-import { useAuth } from "../../context/auth";
-import { toast } from "react-toastify";
+import React from 'react'
+import { Link, NavLink } from 'react-router-dom'
+import { SiShopify } from 'react-icons/si'
+import { useAuth } from '../../context/auth'
+import { toast } from 'react-toastify'
 
 const Header = () => {
-  const [auth, setAuth] = useAuth();
+  const [auth, setAuth] = useAuth()
 
-  const handleLogout=()=>{
+  const handleLogout = () => {
     setAuth({
       ...auth,
-      user:null,
-      token:""
+      user: null,
+      token: '',
     })
-    toast.success('Logout successfully!');
+    toast.success('Logout successfully!')
     localStorage.removeItem('auth')
   }
 
@@ -35,7 +35,7 @@ const Header = () => {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <Link to="/" className="navbar-brand">
               <SiShopify />
-              e-Bazaar{" "}
+              e-Bazaar{' '}
             </Link>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -64,7 +64,11 @@ const Header = () => {
               ) : (
                 <>
                   <li className="nav-item">
-                    <NavLink onClick={handleLogout} to="/login" className="nav-link ">
+                    <NavLink
+                      onClick={handleLogout}
+                      to="/login"
+                      className="nav-link "
+                    >
                       Logout
                     </NavLink>
                   </li>
@@ -80,7 +84,7 @@ const Header = () => {
         </div>
       </nav>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

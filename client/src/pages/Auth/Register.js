@@ -1,35 +1,41 @@
-import React, {useState} from "react";
-import Layout from "../../components/Layout/Layout";
-import {toast} from 'react-toastify'
+import React, { useState } from 'react'
+import Layout from '../../components/Layout/Layout'
+import { toast } from 'react-toastify'
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
-    const [name,setName]=useState('');
-    const [email,setEmail]=useState('');
-    const [password,setPassword]=useState('');
-    const [confirmPassword,setConfirmPassword]=useState('');
-    const [answer,setAnswer]=useState();
-    const navigate = useNavigate();
-        //form function
-    const handleSubmit=async(e)=>{
-        e.preventDefault();
-        try {
-            const res=await axios.post('/api/v1/auth/register',{name,email,password,confirmPassword,answer});
-            console.log(res);
-            if(res.status===201){
-              toast.success(`${res.data.message} , Redirecting to Login page ...`);
-              setTimeout(() => {
-                navigate('/login');
-              }, 3000);
-            }else{
-              toast.error(res.data.message);
-            }
-        } catch (error) {
-            console.log(error)
-            toast.error('Something went wrong in register submit')            
-        }
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [answer, setAnswer] = useState()
+  const navigate = useNavigate()
+  //form function
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      const res = await axios.post('/api/v1/auth/register', {
+        name,
+        email,
+        password,
+        confirmPassword,
+        answer,
+      })
+      console.log(res)
+      if (res.status === 201) {
+        toast.success(`${res.data.message} , Redirecting to Login page ...`)
+        setTimeout(() => {
+          navigate('/login')
+        }, 3000)
+      } else {
+        toast.error(res.data.message)
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error('Something went wrong in register submit')
     }
+  }
 
   return (
     <Layout title="Register -Ecommerce App">
@@ -108,7 +114,7 @@ const Register = () => {
         </form>
       </div>
     </Layout>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

@@ -1,15 +1,15 @@
-import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Policy from "./pages/Policy";
-import PageNotFound from "./pages/PageNotFound";
-import Categories from "./pages/Categories";
-import Register from "./pages/Auth/Register";
-import Login from "./pages/Auth/Login";
-import Dashboard from "./pages/user/Dashboard";
-import PrivateRoute from "./components/Routes/Private";
-import ForgotPassword from "./pages/Auth/ForgotPassword";
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import About from './pages/About'
+import Contact from './pages/Contact'
+import Policy from './pages/Policy'
+import PageNotFound from './pages/PageNotFound'
+import Categories from './pages/Categories'
+import Register from './pages/Auth/Register'
+import Login from './pages/Auth/Login'
+import Dashboard from './pages/user/Dashboard'
+import PrivateRoute from './components/Routes/Private'
+import ForgotPassword from './pages/Auth/ForgotPassword'
 
 function App() {
   return (
@@ -25,11 +25,11 @@ function App() {
         <Route path="/category" element={<Categories />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPassword/>} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
