@@ -9,12 +9,13 @@ const Register = () => {
     const [email,setEmail]=useState('');
     const [password,setPassword]=useState('');
     const [confirmPassword,setConfirmPassword]=useState('');
+    const [answer,setAnswer]=useState();
     const navigate = useNavigate();
         //form function
     const handleSubmit=async(e)=>{
         e.preventDefault();
         try {
-            const res=await axios.post('/api/v1/auth/register',{name,email,password,confirmPassword});
+            const res=await axios.post('/api/v1/auth/register',{name,email,password,confirmPassword,answer});
             console.log(res);
             if(res.status===201){
               toast.success(`${res.data.message} , Redirecting to Login page ...`);
@@ -85,6 +86,20 @@ const Register = () => {
               className="form-control"
               id="exampleInputPassword1"
               required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="exampleInputPassword1" className="form-label">
+              Secret Key
+            </label>
+            <input
+              value={answer}
+              onChange={(e) => setAnswer(e.target.value)}
+              type="text"
+              className="form-control"
+              id="exampleInputPassword1"
+              required
+              placeholder="What is your favourite sport"
             />
           </div>
           <button type="submit" className="btn btn-primary">

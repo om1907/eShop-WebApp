@@ -20,8 +20,8 @@ const Login = () => {
         email,
         password,
       });
-      console.log(res);
       if (res.status === 200) {
+        console.log(res);
         toast.success(`${res.data.message}`);
         setAuth({
           ...auth,
@@ -34,6 +34,7 @@ const Login = () => {
         }, 2000);
       } else {
         toast.error(res.data.message);
+        console.log(res.data.message)
       }
     } catch (error) {
       console.log(error);
@@ -42,11 +43,11 @@ const Login = () => {
   };
 
   return (
-    <Layout title="Register -Ecommerce App">
+    <Layout title="Login -Ecommerce App">
       <div className="register">
         <form onSubmit={handleSubmit}>
           <h4 className="title">Login</h4>
-          <div className="mb-3">
+          <div className="mb-2">
             <label htmlFor="exampleInputEmail" className="form-label">
               Email
             </label>
@@ -59,7 +60,7 @@ const Login = () => {
               required
             />
           </div>
-          <div className="mb-3">
+          <div className="mb-2">
             <label htmlFor="exampleInputPassword1" className="form-label">
               Password
             </label>
@@ -72,9 +73,14 @@ const Login = () => {
               required
             />
           </div>
+          <div class='d-flex flex-column justify-content-center justify-content-between' >
+          <button type="submit" className="btn btn-primary mb-2" onClick={()=>{navigate('/forgot-password')}}>
+            Forgot Password
+          </button>
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
+          </div>
         </form>
       </div>
     </Layout>
