@@ -2,25 +2,27 @@ import axios from "axios";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Layout from "../../components/Layout/Layout";
-import {useNavigate } from "react-router-dom";
+import {useNavigate ,useLocation} from "react-router-dom";
 import { useAuth } from "../../context/auth";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate =useNavigate();
   const [auth,setAuth]=useAuth();
+
+  const navigate =useNavigate();
+  const location=useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`http://localhost:3000/api/v1/auth/login`, {
+      const res = await axios.post(`/api/v1/auth/login`, {
         email,
         password,
       });
       console.log(res);
       if (res.status === 200) {
-        toast.success(`${res.data.message}, redirecting to home page...`);
+        toast.success(`${res.data.message}`);
         setAuth({
           ...auth,
           user:res.data.user,
@@ -28,8 +30,8 @@ const Login = () => {
         })
         localStorage.setItem('auth',JSON.stringify(res.data));
         setTimeout(() => {
-          navigate('/')
-        }, 3000);
+          navigate(location.state || '/')
+        }, 2000);
       } else {
         toast.error(res.data.message);
       }

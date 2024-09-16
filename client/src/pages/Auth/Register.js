@@ -14,7 +14,7 @@ const Register = () => {
     const handleSubmit=async(e)=>{
         e.preventDefault();
         try {
-            const res=await axios.post('http://localhost:3000/api/v1/auth/register',{name,email,password,confirmPassword});
+            const res=await axios.post('/api/v1/auth/register',{name,email,password,confirmPassword});
             console.log(res);
             if(res.status===201){
               toast.success(`${res.data.message} , Redirecting to Login page ...`);
