@@ -18,17 +18,17 @@ const ForgotPassword = () => {
         newPassword,
         answer,
       })
-      console.log(res)
+      console.log(res.message);
       if (res.status === 200) {
         toast.success(res.data.message)
         setTimeout(() => {
           navigate('/login')
         }, 1500)
       } else {
-        toast.error(res.data.message)
+        throw `Error in Forgot Password`;
       }
     } catch (error) {
-      console.log(error)
+      console.log('Error in catch block of forgot password');
     }
   }
   return (
