@@ -1,5 +1,4 @@
 const { default: slugify } = require('slugify');
-const { findByIdAndDelete } = require('../models/categoryModels');
 const Category=require('../models/categoryModels')
 
 exports.createCategoryController = async(req,res)=>{
