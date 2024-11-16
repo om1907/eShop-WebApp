@@ -5,6 +5,7 @@ const connectDB = require('./config/db')
 const morgan = require('morgan')
 const authRoute = require('./routes/authRoutes')
 const categoryRoute =require('./routes/categoryRoute')
+const productRoute =require('./routes/productRoute')
 const cors = require('cors')
 
 //config env
@@ -24,6 +25,7 @@ app.use(morgan('dev'))
 //routes
 app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/category', categoryRoute)
+app.use('/api/v1/product', productRoute)
 
 //rest api
 app.get('/', (req, res) => {
