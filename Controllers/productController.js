@@ -31,7 +31,7 @@ exports.createProductController = async (req, res) => {
           .json({ success: false, message: "File upload failed" });
       }
 
-      const { name, slug, description, category, price, shipping } = req.body;
+      const { name, description, category, price } = req.body;
       const { filename, path, size } = req.file;
 
       switch (true) {
@@ -56,7 +56,7 @@ exports.createProductController = async (req, res) => {
       });
 
       await product.save();
-      res.status(400).json({
+      res.status(201).json({
         success: true,
         message: "Product created successfully",
         product,

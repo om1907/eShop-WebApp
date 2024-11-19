@@ -25,7 +25,7 @@ const ForgotPassword = () => {
           navigate('/login')
         }, 1500)
       } else {
-        throw `Error in Forgot Password`;
+        toast.error(res.data.message)
       }
     } catch (error) {
       console.log('Error in catch block of forgot password');
