@@ -14,7 +14,7 @@ router.post("/create-product", requireSignIn, isAdmin, createProductController);
 
 router.post("/update-product/:id", requireSignIn, isAdmin, updateProductController);
 
-router.get("/get-product", getAllProductsController);
+router.get("/get-products", getAllProductsController);
 
 router.get("/get-product/:slug", getSingleProductController);
 

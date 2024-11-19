@@ -123,12 +123,11 @@ exports.updateProductController = async (req, res) => {
 
 exports.getAllProductsController = async (req, res) => {
   try {
-    const product = await ProductModel.find({})
+    const products = await ProductModel.find({})
       .populate("category") // Populate the 'category' field
-      .select("-photo")
       .limit(10)
       .sort({ createdAt: -1 });
-    if (!product) {
+    if (!products) {
       return res.status(500).send({
         success: false,
         message: "Product fetched failed",
@@ -136,9 +135,9 @@ exports.getAllProductsController = async (req, res) => {
     }
     res.status(200).send({
       success: true,
-      total_count: product.length,
+      total_count: products.length,
       message: "All products are fetched successfully",
-      product,
+      products,
     });
   } catch (error) {
     console.log(error.message);
@@ -154,7 +153,6 @@ exports.getSingleProductController = async (req, res) => {
   try {
     const product = await ProductModel.findOne({ slug: req.params.slug })
       .populate("category")
-      .select("-photo");
     if (!product) {
       return res.status(404).send({
         success: false,
