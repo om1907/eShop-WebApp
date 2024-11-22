@@ -32,7 +32,7 @@ app.use('/api/v1/product', productRoute)
 //rest api
 app.get('/', (req, res) => {
   res.send({
-    message: 'Welcome to eShop app',
+    message: 'Welcome to e-Bazaar app',
   })
 })
 

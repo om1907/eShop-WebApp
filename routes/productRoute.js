@@ -6,6 +6,7 @@ const {
   deleteProductController,
   getProductPhotoController,
   getSingleProductController,
+  productFiltersController,
 } = require("../Controllers/productController");
 const { isAdmin, requireSignIn } = require("../middleware/authMiddleware");
 const router = express.Router();
@@ -21,5 +22,7 @@ router.get("/get-product/:slug", getSingleProductController);
 router.get("/product-photo/:uuid", getProductPhotoController);
 
 router.delete("/delete-product/:id", deleteProductController);
+
+router.post('/product-filters',productFiltersController);
 
 module.exports = router;

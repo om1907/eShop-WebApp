@@ -3,6 +3,8 @@ const {
   RegisterController,
   loginController,
   forgotPasswordController,
+  getAllUserscontroller,
+  deleteUserController,
 } = require('../Controllers/authControllers')
 const { requireSignIn, isAdmin } = require('../middleware/authMiddleware')
 
@@ -26,5 +28,11 @@ router.get('/user-auth', requireSignIn, (req, res) => {
 router.get('/admin-auth', requireSignIn,isAdmin, (req, res) => {
   res.status(200).send({ ok: true })
 })
+
+//get all users
+router.get('/get-users',requireSignIn, isAdmin, getAllUserscontroller);
+
+//delete user
+router.delete('/delete-user/:id', requireSignIn, isAdmin, deleteUserController);
 
 module.exports = router

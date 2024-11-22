@@ -1,33 +1,36 @@
 import React from 'react'
 import Layout from '../components/Layout/Layout'
 import { BiMailSend, BiPhoneCall, BiSupport } from 'react-icons/bi'
+import './Contact.css'; // Custom CSS for Contact page
 
 const Contact = () => {
   return (
-    <Layout title={'Contact us - eCommerce app'}>
-      <div className="row contactus ">
-        <div className="col-md-6 ">
+    <Layout title={'Contact Us - eCommerce App'}>
+      <div className="contact-container">
+        <div className="contact-image col-md-6">
           <img
-            src="/images/contactus.jpeg"
-            alt="contactus"
-            style={{ width: '100%' }}
+            src="/images/contactus.jpeg" // Replace with your image path
+            alt="Contact Us"
+            className="contact-img"
           />
         </div>
-        <div className="col-md-4">
-          <h1 className="bg-dark p-2 text-white text-center">CONTACT US</h1>
-          <p className="text-justify mt-2">
-            any query and info about prodduct feel free to call anytime we 24X7
-            vaialible
+        <div className="contact-info col-md-6">
+          <h1 className="contact-title">Contact Us</h1>
+          <p className="contact-description">
+            Have any questions or inquiries? Feel free to reach out to us! Our support team is available 24/7 to assist you with your needs.
           </p>
-          <p className="mt-3">
-            <BiMailSend /> : www.help@ecommerceapp.com
-          </p>
-          <p className="mt-3">
-            <BiPhoneCall /> : 012-3456789
-          </p>
-          <p className="mt-3">
-            <BiSupport /> : 1800-0000-0000 (toll free)
-          </p>
+
+          <div className="contact-details">
+            <p className="contact-detail">
+              <BiMailSend className="contact-icon" /> Email: <a href="mailto:www.help@ecommerceapp.com">www.help@ecommerceapp.com</a>
+            </p>
+            <p className="contact-detail">
+              <BiPhoneCall className="contact-icon" /> Phone: <a href="tel:+0123456789">012-3456789</a>
+            </p>
+            <p className="contact-detail">
+              <BiSupport className="contact-icon" /> Toll-Free: <a href="tel:+18000000000">1800-0000-0000</a>
+            </p>
+          </div>
         </div>
       </div>
     </Layout>

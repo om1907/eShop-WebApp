@@ -9,9 +9,9 @@ router.post('/create-category',requireSignIn,isAdmin,createCategoryController);
 
 router.put('/update-category/:id',requireSignIn,isAdmin,updateCategoryController);
 
-router.get('/categories',requireSignIn,isAdmin,getAllCategoryController);
+router.get('/categories',getAllCategoryController);
 
-router.get('/category/:slug',requireSignIn,isAdmin,getSingleCategoryController);
+router.get('/category/:slug',getSingleCategoryController);
 
 router.delete('/delete-category/:id',requireSignIn,isAdmin,deleteCategoryCaontroller);
 

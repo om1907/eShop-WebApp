@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { envConfig } from '../../utils/envConfig';
 const { Option } = Select;
 
 
@@ -21,6 +22,7 @@ const CreateProduct = () => {
 
   const handleCreate = async (e) => {
     e.preventDefault();
+    const url = envConfig.createProductUrl;
     try {
       const productData = new FormData();
       productData.append('name', name);
@@ -31,7 +33,7 @@ const CreateProduct = () => {
       productData.append('quantity', quantity);
       console.log(name, category, photo, description, price, quantity); //for testing   
 
-      const { data } = await axios.post('/api/v1/product/create-product', productData);
+      const { data } = await axios.post(url, productData);
       if (data?.success) {
         toast.success('Product Created Successfully');
         setTimeout(() => {
@@ -49,8 +51,9 @@ const CreateProduct = () => {
 
   //get all categories
   const getAllCategory = async () => {
+    const url = envConfig.getAllCategoriesUrl;
     try {
-      const { data } = await axios.get('/api/v1/category/categories');
+      const { data } = await axios.get(url);
       console.log(data);
       if (data.success) {
         setCategories(data?.category);

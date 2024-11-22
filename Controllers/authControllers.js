@@ -152,3 +152,45 @@ exports.forgotPasswordController = async (req, res) => {
     })
   }
 }
+
+exports.getAllUserscontroller =async (req,res)=>{
+  try {
+    const users =await User.find();
+    if(!users){
+      res.status(404).send({
+        success:false,
+        message: 'No Users Found',
+      })
+    }
+    res.status(200).send({
+      success:true,
+      message: 'All Users List',
+      users,
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error in get all users',
+      error,
+    })
+  }
+}
+
+exports.deleteUserController = async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    res.status(200).send({
+      success: true,
+      message: 'User deleted successfully',
+      user,
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Error in delete user',
+      error
+    })
+  }
+}

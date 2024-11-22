@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { Layout } from 'antd'
+import Layout from '../../components/Layout/Layout'
 import AdminMenu from '../../components/Layout/AdminMenu'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Select } from 'antd'
+import { envConfig } from '../../utils/envConfig'
 
 const { Option } = Select;
 
@@ -24,8 +25,9 @@ const UpdateProduct = () => {
 
     //get single product
     const getSingleProduct = async () => {
+        const url = envConfig.getSingleProductUrl;
         try {
-            const { data } = await axios.get(`/api/v1/product/get-product/${params.slug}`);
+            const { data } = await axios.get(`${url}/${params.slug}`);
             console.log(data);
             setName(data?.product?.name);
             setDescription(data?.product?.description);
@@ -47,6 +49,7 @@ const UpdateProduct = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
+        const url = envConfig.updateProductUrl;
         try {
             const productData = new FormData();
             productData.append('name', name);
@@ -57,7 +60,7 @@ const UpdateProduct = () => {
             productData.append('quantity', quantity);
             console.log(name, category, photo, description, price, quantity,id); //for testing   
 
-            const { data } = await axios.put(`/api/v1/product/update-product/${id}`, productData);
+            const { data } = await axios.put(`${url}/${id}`, productData);
             if (data?.success) {
                 toast.success('Product Updated Successfully');
                 setTimeout(() => {
@@ -73,10 +76,11 @@ const UpdateProduct = () => {
     }
 
     const handleDelete = async () => {
+        const url = envConfig.deleteProductUrl;
         try {
             let answer = window.prompt('Are you sure you want to delete this product?');
             if (!answer) return;
-            const { data } = await axios.delete(`/api/v1/product/delete-product/${id}`);
+            const { data } = await axios.delete(`${url}/${id}`);
             if (data?.success) {
                 toast.success('Product Deleted Successfully');
                 setTimeout(() => {
