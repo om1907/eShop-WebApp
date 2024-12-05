@@ -7,6 +7,8 @@ const {
   getProductPhotoController,
   getSingleProductController,
   productFiltersController,
+  getProductCountController,
+  getProductListPerPageController,
 } = require("../Controllers/productController");
 const { isAdmin, requireSignIn } = require("../middleware/authMiddleware");
 const router = express.Router();
@@ -24,5 +26,9 @@ router.get("/product-photo/:uuid", getProductPhotoController);
 router.delete("/delete-product/:id", deleteProductController);
 
 router.post('/product-filters',productFiltersController);
+
+router.get('/product-count', getProductCountController);
+
+router.get('/product-list', getProductListPerPageController);
 
 module.exports = router;

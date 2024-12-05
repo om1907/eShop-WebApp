@@ -89,7 +89,7 @@ const Header = () => {
                 </>
               )}
               <li className="nav-item">
-                <NavLink to="/cartItems" className="nav-link ">
+                <NavLink to="/cart-items" className="nav-link ">
                   Cart[0]
                 </NavLink>
               </li>

@@ -4,6 +4,7 @@ const slugify = require("slugify");
 const Multer = require("multer");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
+const productModel = require("../models/productModel");
 
 //Multer configuration
 const storage = Multer.diskStorage({
@@ -231,7 +232,7 @@ exports.productFiltersController = async (req, res) => {
 
     const products = await ProductModel.find(dbQuery);
     console.log(products);
-    
+
     res.status(200).send({
       success: true,
       products,
@@ -353,3 +354,64 @@ exports.productCategoryController = async (req, res) => {
     });
   }
 };
+
+//get product count
+exports.getProductCountController = async (req, res) => {
+  try {
+    const products = await ProductModel.find({}).estimatedDocumentCount();
+    res.status(200).json({
+      success: true,
+      message: 'Product count fetched successfully',
+      productCount: products.length
+    })
+  } catch (error) {
+    console.Console.log(error);
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong in product count api',
+      error,
+    })
+  }
+}
+
+//get product list per page
+exports.getProductListPerPageController = async (req, res) => {
+  try {
+    const perPage = 3;
+    let pageNumber = parseInt(req.params.page);
+    if (isNaN(pageNumber) || pageNumber <= 0) {
+      pageNumber = 1; 
+    }
+
+    // Get the total number of documents in the collection
+    const totalProducts = await productModel.countDocuments();
+    
+    // Calculate the total number of pages available
+    const totalPages = Math.ceil(totalProducts / perPage);
+
+    // Check if the requested page number exceeds the total pages
+    if (pageNumber > totalPages) {
+      return res.status(404).send({
+        success: false,
+        message: `Page ${pageNumber} does not exist. Only ${totalPages} pages are available.`,
+      });
+    }
+    
+    const products = await productModel.find()
+    .skip((pageNumber-1) * perPage)
+    .limit(perPage)
+    .sort({ CreatedAt: -1 });
+    console.log(products);
+    res.status(200).send({
+      success: true,
+      products,
+    })
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: 'Something went wrong in getProductListPerPage api',
+      error,
+    })
+  }
+}
