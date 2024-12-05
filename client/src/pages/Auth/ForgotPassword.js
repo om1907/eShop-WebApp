@@ -18,7 +18,7 @@ const ForgotPassword = () => {
         newPassword,
         answer,
       })
-      console.log(res)
+      console.log(res.message);
       if (res.status === 200) {
         toast.success(res.data.message)
         setTimeout(() => {
@@ -28,7 +28,7 @@ const ForgotPassword = () => {
         toast.error(res.data.message)
       }
     } catch (error) {
-      console.log(error)
+      console.log('Error in catch block of forgot password');
     }
   }
   return (
